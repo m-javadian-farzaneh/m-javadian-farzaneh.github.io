@@ -3,48 +3,124 @@
   <head>
     <title>Mohammad Javadian Farzaneh</title>
     <style>
+      /* Reset default margin and padding */
+      * {
+        margin: 0;
+        padding: 0;
+      }
+      
+      /* Body style */
       body {
         display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        font-family: sans-serif;
+      }
+      
+      /* Header style */
+      header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-bottom: 50px;
+      }
+      
+      header img {
+        width: 200px;
+        height: 200px;
+        border-radius: 50%;
+        margin-right: 50px;
+      }
+      
+      header h1 {
+        font-size: 48px;
+        font-weight: bold;
         text-align: center;
+        margin-right: 50px;
       }
-      #left-column {
-        flex-grow: 1;
+      
+      /* Main content style */
+      main {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        width: 100%;
+        max-width: 1200px;
       }
-      #right-column {
-        flex-basis: 30%;
-        overflow-y: scroll;
-        height: 300px;
+      
+      main section {
+        width: 45%;
+      }
+      
+      main section ul {
+        margin-top: 20px;
+        padding-left: 20px;
+      }
+      
+      /* Social media icons style */
+      .social-media-icons {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 20px;
+      }
+      
+      .social-media-icons a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0 10px;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        color: white;
+        background-color: #333;
+        transition: all 0.3s ease;
+      }
+      
+      .social-media-icons a:hover {
+        transform: scale(1.1);
+      }
+      
+      /* Social media icon styles */
+      .fa {
+        font-size: 24px;
+      }
+      
+      .fa-linkedin {
+        background-color: #0077b5;
+      }
+      
+      .fa-twitter {
+        background-color: #1da1f2;
+      }
+      
+      .fa-github {
+        background-color: #333;
+      }
+      
+      .fa-medium {
+        background-color: #00ab6c;
       }
     </style>
   </head>
   <body>
-    <div id="left-column">
-      <img src="personal_image.jpg" alt="Mohammad Javadian Farzaneh" width="200">
+    <header>
+      <img src="personal_image.jpg" alt="Mohammad Javadian Farzaneh">
       <h1>Mohammad Javadian Farzaneh</h1>
-      <p>I am a highly motivated and ambitious individual with a passion for Machine Learning and Deep learning. I have a M.Sc in Artificial Intelligence and have gained valuable knowledge and skills in Machine Vision. I am currently seeking a PhD position in computer vision in order to deepen my understandings and contribute to the field. My strong analytical, research, and communication skills make me an ideal candidate for any research-based role.</p>
-      <h2>Publications</h2>
-      <ul>
-        <li>Publication 1</li>
-        <li>Publication 2</li>
-        <li>Publication 3</li>
-        <!-- Add more items as necessary -->
-      </ul>
-    </div>
-    <div id="right-column">
-      <h2>News</h2>
-      <ul>
-        <li>News item 1</li>
-        <li>News item 2</li>
-        <li>News item 3</li>
-        <li>News item 4</li>
-        <li>News item 5</li>
-        <li>News item 6</li>
-        <li>News item 7</li>
-        <li>News item 8</li>
-        <li>News item 9</li>
-        <li>News item 10</li>
-        <!-- Add more items as necessary -->
-      </ul>
-    </div>
-  </body>
-</html>
+    </header>
+    <main>
+      <section>
+        <p>I am a highly motivated and ambitious individual with a passion for Machine Learning and Deep learning. I have a M.Sc in Artificial Intelligence and have gained valuable knowledge and skills in Machine Vision. I am currently seeking a PhD position in computer vision in order to deepen my understandings and contribute to the field. My strong analytical, research, and communication skills make me an ideal candidate for any research-based role.</p>
+        <h2>Publications</h2>
+        <ul>
+          <li>Publication 1</li>
+          <li>Publication 2</li>
+          <li>Publication 3</li>
+          <!-- Add more items as necessary -->
+        </ul>
+        </section>
+        </main>
+        </body>
+        </html>
