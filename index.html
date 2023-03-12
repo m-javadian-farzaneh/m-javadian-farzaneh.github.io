@@ -68,12 +68,27 @@
       line-height: 1.5;
     }
 
+    /* Add styles for the image and headings */
+    .header {
+      display: flex;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+
+    .header h1, .header h2 {
+      margin-left: 20px;
+    }
+
   </style>
 </head>
 <body>
-  <img src="cut_image.jpg" alt="My Image" width="250" height="250" >
-  <h1>Mohammad Javadian Farzaneh</h1>
-  <h2>MSc student at University of Isfahan</h2>
+  <div class="header">
+    <img src="cut_image.jpg" alt="My Image" width="250" height="250" >
+    <div>
+      <h1>Mohammad Javadian Farzaneh</h1>
+      <h2>MSc student at University of Isfahan</h2>
+    </div>
+  </div>
 
   <!-- Add social media icons -->
   <div class="social-icons">
