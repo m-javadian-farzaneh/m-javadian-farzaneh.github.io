@@ -67,22 +67,32 @@
       margin-bottom: 10px;
       line-height: 1.5;
     }
-
-    /* Add styles for the image and headings */
-    .header {
+ 
+     /* Add styles for the container that wraps the image, name, and academic status */
+    .profile-container {
       display: flex;
       align-items: center;
       margin-bottom: 20px;
     }
 
-    .header h1, .header h2 {
-      margin-left: 20px;
+    .profile-container img {
+      margin-right: 20px;
+    }
+
+    .profile-container h1 {
+      margin: 0;
+      margin-bottom: 10px;
+    }
+
+    .profile-container h2 {
+      margin: 0;
+      margin-bottom: 0;
     }
 
   </style>
 </head>
 <body>
-  <div class="header">
+  <div class="profile-container">
     <img src="cut_image.jpg" alt="My Image" width="250" height="250" >
     <div>
       <h1>Mohammad Javadian Farzaneh</h1>
