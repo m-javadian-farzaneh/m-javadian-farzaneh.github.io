@@ -44,13 +44,13 @@
 	
 	  /* Add styles for the news section */
 	  .news {
-      float:right;
+      float:left;
       overflow: auto;
       width: 30%;
-      margin-left: 20px;
+      margin-left: 150px;
       height: 200px;
       padding: 20px;
-      margin-top: 20px;
+      margin-top: 50px;
       background-color: #f2f2f2;
       border: 1px solid #ccc;
       border-radius: 5px;
@@ -58,7 +58,6 @@
     }
 
     .news ul {
-      list-style: none;
       margin: 0;
       padding: 0;
     }
@@ -71,22 +70,23 @@
      /* Add styles for the container that wraps the image, name, and academic status */
     .profile-container {
       display: flex;
-      align-items: center;
-      margin-bottom: 20px;
+      align-items: top;
+      margin-left: 150px;
+      margin-top: 10px;
     }
 
     .profile-container img {
       margin-right: 20px;
     }
 
-    .profile-container h1 {
-      margin: 0;
-      margin-bottom: 10px;
-    }
-
     .profile-container h2 {
       margin: 0;
-      margin-bottom: 0;
+      margin-top: 10px;
+    }
+
+    .profile-container h3 {
+      margin: 0;
+      margin-top: 0;
     }
 
   </style>
@@ -95,8 +95,13 @@
   <div class="profile-container">
     <img src="cut_image.jpg" alt="My Image" width="250" height="250" >
     <div>
-      <h1>Mohammad Javadian Farzaneh</h1>
-      <h2>MSc student at University of Isfahan</h2>
+      <h2>Mohammad Javadian Farzaneh</h2>
+      <h3>MSc student at University of Isfahan</h3>
+      <h2 style="margin-top: 30px;">About Me</h2>
+      <p style="font-size:medium;text-align: justify;width: 500px;">I am a highly motivated and ambitious individual with a passion for Machine Learning and Deep learning.
+         I have a M.Sc in Artificial Intelligence and have gained valuable knowledge and skills in Machine Vision specially Visual SLAM.
+         I am currently seeking a PhD position in computer vision in order to deepen my understandings and contribute to the field.
+         My strong analytical, research, and communication skills make me an ideal candidate for any research-based role.
     </div>
   </div>
 
@@ -110,10 +115,10 @@
   <div class="news">
     <h3>Latest News</h3>
     <ul>
-      <li>defended master thesis with 19.67 out 20</li>
-      <li>Teaching assistant for the Computer Vision class</li>
-      <li>published my paper's preprint edition on Arxiv</li>
-      <li>Teaching assistant for the Microprocessor and Assembly class</li>
+      <li>Defended master thesis with 19.67 out 20 on 2023/01/11 under supervision of Dr.Hossein Mahvash Mohammadi</li>
+      <li>Teaching assistant for the Computer Vision class tought by Dr.Mahvash Mohammdi in fall 2022</li>
+      <li>Published my paper's preprint edition on <a href="https://arxiv.org/abs/2212.12185">Arxiv</a> on 2023/12/22</li>
+      <li>Teaching assistant for the Microprocessor and Assembly class tought by Dr.Mahvash Mohammdi in spring 2022</li>
 	</ul>
   </div>
 
