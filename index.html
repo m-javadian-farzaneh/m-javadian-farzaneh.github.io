@@ -1,140 +1,733 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <title>M.Javadian</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mohammad Javadian Farzaneh</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+
   <style>
-    /* Add styles for the icons, image, and sidebar */
-    .social-icons {
-      float:right;
-      margin-left: 30px;
-      width: 12%;
-      text-align: center;
-      height: 10%;
-      padding: 10px;
-      background-color: #ffffff;
-      border: 1px solid #00ccff;
-      border-radius: 5px;
-     
+    :root {
+      --teal: oklch(0.65 0.13 185);
+      --teal-light: oklch(0.93 0.05 185);
+      --teal-dark: oklch(0.45 0.12 185);
+      --ink: #0f172a;
+      --ink-muted: #64748b;
+      --bg: #ffffff;
+      --bg-off: #f8fafc;
+      --border: #e2e8f0;
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans: 'DM Sans', system-ui, sans-serif;
     }
 
-    .social-icons a {
-      color: #333;
-      font-size: 24px;
-      transition: color 0.3s ease-in-out;
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: var(--sans);
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.7;
+      font-size: 16px;
     }
 
-    .social-icons a:hover {
-      color: #1DA1F2;
-    }
-
-    .sidebar {
-      float: right;
-      width: 30%;
-      margin-left: 20px;
-      padding: 20px;
-      background-color: #f2f2f2;
-      border: 1px solid #00ccff;
-      border-radius: 5px;
-      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    }
-
-    .sidebar h3 {
-      margin-top: 0;
-    }
-
-    .sidebar p {
-      margin-top: 10px;
-      line-height: 1.5;
-    }
-	
-	  /* Add styles for the news section */
-	  .news {
-      float:left;
-      overflow: auto;
-      width: 50%;
-      margin-left: 150px;
-      height: 200px;
-      margin-top: 50px;
-      padding-left: 5px;
-      background-color: #f8feff;
-      border: 1px solid #00ccff;
-      border-radius: 5px;
-    }
-
-    .news ul {
-      margin: 0;
-      padding: 0;
-    }
-
-    .news li {
-      margin-left: 20px;
-      margin-bottom: 10px;
-      line-height: 1.5;
-    }
- 
-     /* Add styles for the container that wraps the image, name, and academic status */
-    .profile-container {
+    /* ── NAV ── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
       display: flex;
-      align-items: top;
-      margin-left: 150px;
-      margin-top: 10px;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 3rem;
+      height: 60px;
+    }
+    .nav-name {
+      font-family: var(--serif);
+      font-weight: 500;
+      font-size: 1.05rem;
+      letter-spacing: 0.01em;
+      color: var(--ink);
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.85rem;
+      font-weight: 500;
+      text-decoration: none;
+      color: var(--ink-muted);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      transition: color 0.2s;
+    }
+    .nav-links a:hover { color: var(--teal); }
+
+    /* ── LAYOUT VARIANTS ── */
+    /* Layout A: Sidebar */
+    body.layout-sidebar .page-wrap {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      min-height: 100vh;
+      padding-top: 60px;
+    }
+    body.layout-sidebar .sidebar {
+      display: flex;
+      flex-direction: column;
+      position: sticky;
+      top: 60px;
+      height: calc(100vh - 60px);
+      border-right: 1px solid var(--border);
+      padding: 3rem 2rem;
+      background: var(--bg-off);
+    }
+    body.layout-sidebar .main-content {
+      padding: 4rem 5rem;
+      max-width: 820px;
     }
 
-    .profile-container img {
-      margin-right: 20px;
+    /* Layout B: Single column */
+    body.layout-single .page-wrap { padding-top: 60px; }
+    body.layout-single .sidebar { display: none; }
+    body.layout-single .main-content {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 4rem 2rem;
+    }
+    body.layout-single .hero-block {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 3rem;
+      align-items: start;
     }
 
-    .profile-container h2 {
-      margin: 0;
-      margin-top: 10px;
+    /* ── SIDEBAR CONTENT ── */
+    .sidebar-photo {
+      width: 140px;
+      height: 140px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 3px solid var(--teal-light);
+      margin-bottom: 1.5rem;
+    }
+    .sidebar-name {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 700;
+      line-height: 1.3;
+      margin-bottom: 0.3rem;
+    }
+    .sidebar-title {
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+      line-height: 1.4;
+      margin-bottom: 1.5rem;
+    }
+    .sidebar-links {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      margin-top: auto;
+    }
+    .sidebar-link {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.82rem;
+      color: var(--ink-muted);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .sidebar-link:hover { color: var(--teal); }
+    .sidebar-link svg { width: 15px; height: 15px; flex-shrink: 0; }
+    .cv-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      margin-top: 1rem;
+      padding: 0.55rem 1.1rem;
+      background: var(--teal);
+      color: white;
+      font-size: 0.82rem;
+      font-weight: 600;
+      border-radius: 8px;
+      text-decoration: none;
+      letter-spacing: 0.03em;
+      transition: background 0.2s, transform 0.15s;
+    }
+    .cv-btn:hover { background: var(--teal-dark); transform: translateY(-1px); }
+    .cv-btn svg { width: 14px; height: 14px; }
+
+    /* ── HERO (single col) ── */
+    .hero-contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      margin-top: 0.5rem;
+    }
+    .hero-contact .sidebar-link { font-size: 0.84rem; }
+
+    .hero-photo-single {
+      width: 160px;
+      height: 160px;
+      border-radius: 50%;
+      object-fit: cover;
+      object-position: center top;
+      border: 3px solid var(--teal-light);
+      flex-shrink: 0;
+    }
+    .hero-tag {
+      display: inline-block;
+      background: var(--teal-light);
+      color: var(--teal-dark);
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.7rem;
+      border-radius: 999px;
+      margin-bottom: 1rem;
+    }
+    .hero-name {
+      font-family: var(--serif);
+      font-size: clamp(2rem, 4vw, 3rem);
+      font-weight: 700;
+      line-height: 1.15;
+      margin-bottom: 0.5rem;
+    }
+    .hero-subtitle {
+      font-size: 1.05rem;
+      color: var(--ink-muted);
+      font-weight: 300;
+      margin-bottom: 1.5rem;
+    }
+    .hero-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+      margin-bottom: 1.5rem;
+    }
+    .chip {
+      background: var(--bg-off);
+      border: 1px solid var(--border);
+      color: var(--ink);
+      font-size: 0.78rem;
+      font-weight: 500;
+      padding: 0.3rem 0.8rem;
+      border-radius: 999px;
+    }
+    .chip.teal {
+      background: var(--teal-light);
+      border-color: transparent;
+      color: var(--teal-dark);
     }
 
-    .profile-container h3 {
-      margin: 0;
-      margin-top: 0;
+    /* ── SECTIONS ── */
+    section {
+      padding: 4rem 0;
+      border-top: 1px solid var(--border);
+    }
+    section:first-child { border-top: none; }
+
+    .section-label {
+      font-size: 0.72rem;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--teal);
+      margin-bottom: 0.6rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: 1.6rem;
+      font-weight: 700;
+      margin-bottom: 2rem;
     }
 
+    /* ── NEWS ── */
+    .news-list { display: flex; flex-direction: column; gap: 1.2rem; }
+    .news-item {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 1.2rem;
+      align-items: start;
+      padding: 1.2rem;
+      background: var(--bg-off);
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .news-item:hover {
+      border-color: var(--teal);
+      box-shadow: 0 2px 16px oklch(0.65 0.13 185 / 0.1);
+    }
+    .news-dot {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: var(--teal);
+      margin-top: 0.45rem;
+      flex-shrink: 0;
+    }
+    .news-date {
+      font-size: 0.75rem;
+      color: var(--ink-muted);
+      font-weight: 500;
+      margin-bottom: 0.25rem;
+      letter-spacing: 0.04em;
+    }
+    .news-text { font-size: 0.92rem; line-height: 1.6; }
+    .news-text em { color: var(--teal-dark); font-style: normal; font-weight: 600; }
+
+    /* ── BIO ── */
+    .bio-text {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--ink);
+      font-weight: 300;
+    }
+    .bio-text strong { font-weight: 600; color: var(--ink); }
+
+    /* ── PUBLICATIONS ── */
+    .pub-list { display: flex; flex-direction: column; gap: 1.5rem; }
+    .pub-item {
+      padding: 1.5rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      position: relative;
+      transition: border-color 0.2s, box-shadow 0.2s;
+    }
+    .pub-item:hover {
+      border-color: var(--teal);
+      box-shadow: 0 2px 20px oklch(0.65 0.13 185 / 0.08);
+    }
+    .pub-badge {
+      display: inline-block;
+      font-size: 0.68rem;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 0.2rem 0.6rem;
+      border-radius: 4px;
+      margin-bottom: 0.7rem;
+    }
+    .pub-badge.journal { background: oklch(0.93 0.06 145); color: oklch(0.35 0.1 145); }
+    .pub-badge.workshop { background: oklch(0.93 0.06 280); color: oklch(0.35 0.1 280); }
+    .pub-title {
+      font-family: var(--serif);
+      font-size: 1.05rem;
+      font-weight: 500;
+      line-height: 1.4;
+      margin-bottom: 0.5rem;
+    }
+    .pub-authors {
+      font-size: 0.82rem;
+      color: var(--ink-muted);
+      margin-bottom: 0.3rem;
+    }
+    .pub-venue {
+      font-size: 0.82rem;
+      color: var(--ink-muted);
+      font-style: italic;
+      margin-bottom: 0.8rem;
+    }
+    .pub-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.35rem;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--teal-dark);
+      text-decoration: none;
+      letter-spacing: 0.03em;
+    }
+    .pub-link:hover { text-decoration: underline; }
+    .pub-link svg { width: 13px; height: 13px; }
+
+    /* ── TEACHING ── */
+    .ta-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 1rem; }
+    .ta-card {
+      padding: 1.2rem;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      background: var(--bg-off);
+      transition: border-color 0.2s;
+    }
+    .ta-card:hover { border-color: var(--teal); }
+    .ta-code {
+      font-size: 0.72rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--teal-dark);
+      margin-bottom: 0.25rem;
+    }
+    .ta-name {
+      font-size: 0.92rem;
+      font-weight: 600;
+      margin-bottom: 0.2rem;
+      line-height: 1.3;
+    }
+    .ta-meta {
+      font-size: 0.78rem;
+      color: var(--ink-muted);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 2.5rem 0;
+      text-align: center;
+      font-size: 0.8rem;
+      color: var(--ink-muted);
+    }
+
+    /* ── ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.65s ease, transform 0.65s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .reveal-delay-1 { transition-delay: 0.1s; }
+    .reveal-delay-2 { transition-delay: 0.2s; }
+    .reveal-delay-3 { transition-delay: 0.3s; }
+    .reveal-delay-4 { transition-delay: 0.4s; }
+
+    /* ── TWEAKS PANEL ── */
+    #tweaks-panel {
+      display: none;
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      background: white;
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 1.2rem 1.5rem;
+      box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+      z-index: 999;
+      min-width: 220px;
+      font-size: 0.85rem;
+    }
+    #tweaks-panel h3 { font-size: 0.8rem; font-weight: 700; letter-spacing: 0.08em; text-transform: uppercase; color: var(--ink-muted); margin-bottom: 1rem; }
+    .tweak-row { display: flex; flex-direction: column; gap: 0.3rem; margin-bottom: 1rem; }
+    .tweak-row label { font-size: 0.78rem; font-weight: 600; color: var(--ink); }
+    .tweak-row select, .tweak-row input[type=range] { width: 100%; }
+    .tweak-row select { padding: 0.35rem 0.5rem; border-radius: 6px; border: 1px solid var(--border); font-family: var(--sans); font-size: 0.82rem; }
+
+    @media (max-width: 768px) {
+      nav { padding: 0 1.2rem; }
+      .nav-links { gap: 1rem; }
+      body.layout-sidebar .page-wrap { grid-template-columns: 1fr; }
+      body.layout-sidebar .sidebar { position: static; height: auto; }
+      body.layout-sidebar .main-content { padding: 2rem 1.2rem; }
+      body.layout-single .main-content { padding: 2rem 1.2rem; }
+      body.layout-single .hero-block { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
-<body>
-  <div class="profile-container">
-    <img style="margin-top: 15px;" src="cut_image.jpg" alt="My Image" width="250" height="250" >
-    <div>
-      <h2 style="font-family: Arial, Helvetica, sans-serif;">Mohammad Javadian Farzaneh</h2>
-      <h3 style="font-family: Arial, Helvetica, sans-serif;">MSc student at University of Isfahan</h3>
-      <h2 style="margin-top: 30px;">About Me</h2>
-      <p  style="font-size:medium;text-align: justify;width: 500px;font-family: Arial, Helvetica, sans-serif;">I am a highly motivated and ambitious individual with a passion for Computer Vision.
-         I have a <span style="color: #0044ff;">M.Sc in Artificial Intelligence from University of Isfahan</span> and have gained valuable knowledge and skills in Machine Vision specially <span style="color: #0044ff;">Visual SLAM</span> . My master thesis is entitled <span style="color: #0044ff;">"Implementation of a blind navigation method in outdoors/indoors areas"</span>.
-         ORB-SLAM library is used to create a 3D map from enviroment. Yolov4 is used for object detection and distance estimation. 
-         I am currently seeking a PhD position in computer vision in order to deepen my understandings and contribute to the field.
-         My strong analytical, research, and communication skills make me an ideal candidate for any research-based role.
+<body class="layout-sidebar">
+
+<!-- NAV -->
+<nav>
+  <span class="nav-name">M. Javadian Farzaneh</span>
+  <ul class="nav-links">
+    <li><a href="#news">News</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#publications">Publications</a></li>
+    <li><a href="#teaching">Teaching</a></li>
+  </ul>
+</nav>
+
+<div class="page-wrap">
+
+  <!-- SIDEBAR -->
+  <aside class="sidebar">
+    <img src="uploads/photo-1776593987306.jpg" alt="Mohammad Javadian Farzaneh" class="sidebar-photo" />
+    <div class="sidebar-name">Mohammad<br>Javadian Farzaneh</div>
+    <div class="sidebar-title">PhD Student · Sabanci University<br>Advisor: Prof. Selim Balcisoy</div>
+    <div class="hero-chips">
+      <span class="chip teal">HCI</span>
+      <span class="chip teal">XR</span>
+      <span class="chip teal">Human-AI</span>
     </div>
-      <!-- Add social media icons -->
-  <div class="social-icons">
-    <h2 style="margin-bottom: 10px; font-family: Arial, Helvetica, sans-serif;">Find me on:</h2>
-    <a href="https://www.linkedin.com/in/mohammadjavadianfarzaneh/"><i class="fa fa-linkedin-square"></i></a>
-    <a href="https://medium.com/@m-javadian"><i class="fa fa-medium" style="margin-left: 10px;"></i></a>
-    <a href="https://github.com/m-javadian-farzaneh"><i class="fa fa-github" style="margin-left: 10px;"></i></a>
-    <a href="https://raw.githubusercontent.com/m-javadian-farzaneh/m-javadian-farzaneh.github.io/main/EDU_CV.pdf"><p style="margin-top: 5px;font-size: large;font-weight: bold;">CV</p></a>
+    <div class="sidebar-links">
+      <a href="mailto:mohammad.javadian@sabanciuniv.edu" class="sidebar-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+        mohammad.javadian@sabanciuniv.edu
+      </a>
+      <a href="https://scholar.google.com/citations?user=ct5hSs0AAAAJ&hl=en" target="_blank" class="sidebar-link">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+        Google Scholar
+      </a>
+      <a href="https://www.linkedin.com/in/mohammadjavadianfarzaneh/" target="_blank" class="sidebar-link">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:15px;height:15px;flex-shrink:0"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        LinkedIn
+      </a>
+      <a href="https://medium.com/@m-javadian" target="_blank" class="sidebar-link">
+        <svg viewBox="0 0 24 24" fill="currentColor" style="width:15px;height:15px;flex-shrink:0"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+        Medium
+      </a>
+      <a href="cv.pdf" download class="cv-btn" style="margin-top:1.2rem">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+        Download CV
+      </a>
+    </div>
+  </aside>
+
+  <!-- MAIN -->
+  <main class="main-content">
+
+    <!-- HERO (single col only) -->
+    <section id="hero" style="padding-top:0; border-top:none;" class="hero-section-single">
+      <div class="hero-block">
+        <div>
+          <div class="hero-tag">PhD Researcher</div>
+          <h1 class="hero-name reveal">Mohammad<br>Javadian Farzaneh</h1>
+          <p class="hero-subtitle reveal reveal-delay-1">PhD Student at Sabanci University<br>Advised by Prof. Selim Balcisoy</p>
+          <div class="hero-chips reveal reveal-delay-2">
+            <span class="chip teal">HCI</span>
+            <span class="chip teal">XR</span>
+            <span class="chip teal">Human-AI Interaction</span>
+          </div>
+          <div class="hero-contact reveal reveal-delay-3">
+            <a href="mailto:mohammad.javadian@sabanciuniv.edu" class="sidebar-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="M2 7l10 7 10-7"/></svg>
+              mohammad.javadian@sabanciuniv.edu
+            </a>
+            <a href="https://scholar.google.com/citations?user=ct5hSs0AAAAJ&hl=en" target="_blank" class="sidebar-link">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 007.54.54l3-3a5 5 0 00-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 00-7.54-.54l-3 3a5 5 0 007.07 7.07l1.71-1.71"/></svg>
+              Google Scholar
+            </a>
+            <a href="https://www.linkedin.com/in/mohammadjavadianfarzaneh/" target="_blank" class="sidebar-link">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width:15px;height:15px;flex-shrink:0"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+              LinkedIn
+            </a>
+            <a href="https://medium.com/@m-javadian" target="_blank" class="sidebar-link">
+              <svg viewBox="0 0 24 24" fill="currentColor" style="width:15px;height:15px;flex-shrink:0"><path d="M13.54 12a6.8 6.8 0 01-6.77 6.82A6.8 6.8 0 010 12a6.8 6.8 0 016.77-6.82A6.8 6.8 0 0113.54 12zm7.42 0c0 3.54-1.51 6.42-3.38 6.42-1.87 0-3.39-2.88-3.39-6.42s1.52-6.42 3.39-6.42 3.38 2.88 3.38 6.42M24 12c0 3.17-.53 5.75-1.19 5.75-.66 0-1.19-2.58-1.19-5.75s.53-5.75 1.19-5.75C23.47 6.25 24 8.83 24 12z"/></svg>
+              Medium
+            </a>
+          </div>
+          <div class="reveal reveal-delay-4" style="margin-top:0.5rem">
+            <a href="cv.pdf" download class="cv-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/></svg>
+              Download CV
+            </a>
+          </div>
+        </div>
+        <img src="uploads/photo-1776593987306.jpg" alt="Mohammad Javadian Farzaneh" class="hero-photo-single reveal reveal-delay-1" />
+      </div>
+    </section>
+
+    <!-- NEWS -->
+    <section id="news">
+      <div class="section-label reveal">Latest</div>
+      <h2 class="section-title reveal">News &amp; Updates</h2>
+      <div class="news-list">
+        <div class="news-item reveal reveal-delay-1">
+          <div class="news-dot"></div>
+          <div>
+            <div class="news-date">April 2026 · Barcelona, Spain</div>
+            <div class="news-text">Paper accepted at <em>XR for Challenging Environments (XR4CE) workshop @ CHI 2026</em> — <em>"Calibrated Trust and Resilience in Many-to-Many AI-Integrated XR Collaboration for Disaster Response"</em></div>
+          </div>
+        </div>
+        <div class="news-item reveal reveal-delay-2">
+          <div class="news-dot"></div>
+          <div>
+            <div class="news-date">October 2025</div>
+            <div class="news-text">Paper published in the <em>International Journal of Human–Computer Interaction (IJHCI)</em> — <em>"Evaluating Usability Gaps in Passthrough Mixed Reality Interfaces"</em></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="about">
+      <div class="section-label reveal">Background</div>
+      <h2 class="section-title reveal">About Me</h2>
+      <p class="bio-text reveal">
+        I am a <strong>PhD student at Sabanci University</strong>, Istanbul, Turkey, working under the supervision of <strong>Prof. Selim Balcisoy</strong>. My research sits at the intersection of <strong>Human-Computer Interaction (HCI)</strong>, <strong>Extended Reality (XR)</strong>, and <strong>Human-AI Interaction</strong>, with a focus on how people collaborate with AI systems in immersive environments.
+      </p>
+      <br />
+      <p class="bio-text reveal reveal-delay-1">
+        I am particularly interested in how XR technologies can support complex, high-stakes collaborative tasks — such as disaster response — and in designing AI systems that people can appropriately trust and rely on. My work spans both theoretical and applied research, combining user studies, system design, and empirical evaluation.
+      </p>
+    </section>
+
+    <!-- PUBLICATIONS -->
+    <section id="publications">
+      <div class="section-label reveal">Research</div>
+      <h2 class="section-title reveal">Publications</h2>
+      <div class="pub-list">
+
+        <div class="pub-item reveal reveal-delay-1">
+          <span class="pub-badge workshop">Workshop Paper · CHI 2026</span>
+          <div class="pub-title">Calibrated Trust and Resilience in Many-to-Many AI-Integrated XR Collaboration for Disaster Response</div>
+          <div class="pub-authors">Farzaneh, M. J., &amp; Balcisoy, S.</div>
+          <div class="pub-venue">XR4CE Workshop @ CHI'26, April 14, 2026 · Barcelona, Spain</div>
+        </div>
+
+        <div class="pub-item reveal reveal-delay-2">
+          <span class="pub-badge journal">Journal · IJHCI 2025</span>
+          <div class="pub-title">Evaluating Usability Gaps in Passthrough Mixed Reality Interfaces</div>
+          <div class="pub-authors">Javadian Farzaneh, M., Karadal, P., Aygen, H. B., &amp; Cagiltay, K.</div>
+          <div class="pub-venue">International Journal of Human–Computer Interaction, 2025, pp. 1–17</div>
+          <a href="https://doi.org/10.1080/10447318.2025.2575889" target="_blank" class="pub-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6"/><polyline points="15 3 21 3 21 9"/><line x1="10" y1="14" x2="21" y2="3"/></svg>
+            DOI: 10.1080/10447318.2025.2575889
+          </a>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- TEACHING -->
+    <section id="teaching">
+      <div class="section-label reveal">Academia</div>
+      <h2 class="section-title reveal">Teaching Assistantship</h2>
+      <div class="ta-grid">
+        <div class="ta-card reveal reveal-delay-1">
+          <div class="ta-code">DSA 301</div>
+          <div class="ta-name">Data Visualization</div>
+          <div class="ta-meta">Dr. Selim Balcisoy<br>Spring 2026</div>
+        </div>
+        <div class="ta-card reveal reveal-delay-2">
+          <div class="ta-code">CS 449/549</div>
+          <div class="ta-name">Human-Computer Interaction</div>
+          <div class="ta-meta">Dr. Polat Goktas<br>Fall 2025</div>
+        </div>
+        <div class="ta-card reveal reveal-delay-3">
+          <div class="ta-code">CS 204</div>
+          <div class="ta-name">Advanced Programming</div>
+          <div class="ta-meta">Dr. Kamer Kaya<br>Fall 2024</div>
+        </div>
+        <div class="ta-card reveal reveal-delay-4">
+          <div class="ta-code">CS 204</div>
+          <div class="ta-name">Advanced Programming</div>
+          <div class="ta-meta">Dr. Albert Levi<br>Spring 2024</div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2026 Mohammad Javadian Farzaneh · Sabanci University, Istanbul, Turkey</p>
+    </footer>
+
+  </main>
+</div>
+
+<!-- TWEAKS PANEL -->
+<div id="tweaks-panel">
+  <h3>Tweaks</h3>
+  <div class="tweak-row">
+    <label>Layout</label>
+    <select id="tweak-layout">
+      <option value="layout-sidebar">Sidebar + Content</option>
+      <option value="layout-single">Single Column</option>
+    </select>
   </div>
+  <div class="tweak-row">
+    <label>Accent Color</label>
+    <select id="tweak-color">
+      <option value="teal">Teal (default)</option>
+      <option value="indigo">Indigo</option>
+      <option value="slate">Slate</option>
+    </select>
   </div>
-
-
-
-  <div class="news">
-    <h3 style="margin-left: 10px;">Latest News</h3>
-    <ul>
-      <li>Published post named <a href="https://pub.towardsai.net/visual-slam-a-booster-overview-ace70b95485c">"Visual SLAM, A Booster Overview"</a> in TowardsAI</li>
-      <li>Defended master thesis with 19.67 out 20 on 2023/01/11 under supervision of Dr.Hossein Mahvash Mohammadi</li>
-      <li>Teaching assistant for the Computer Vision class tought by Dr.Mahvash Mohammdi in fall 2022</li>
-      <li>Published my paper's preprint edition on <a href="https://arxiv.org/abs/2212.12185">Arxiv</a> on 2023/12/22</li>
-      <li>Teaching assistant for the Microprocessor and Assembly class tought by Dr.Mahvash Mohammdi in spring 2022</li>
-	</ul>
+  <div class="tweak-row">
+    <label>Font size</label>
+    <input type="range" id="tweak-font" min="14" max="20" step="1" value="16" />
   </div>
+</div>
 
+<script>
+  // Tweaks
+  const TWEAK_DEFAULTS = /*EDITMODE-BEGIN*/{
+    "layout": "layout-single",
+    "color": "teal",
+    "fontSize": 16
+  }/*EDITMODE-END*/;
 
-  <!-- Add Font Awesome library -->
-  <script src="https://kit.fontawesome.com/your-font-awesome-kit-id.js" crossorigin="anonymous"></script>
+  let tweaks = { ...TWEAK_DEFAULTS };
+
+  function applyTweaks() {
+    // Layout
+    document.body.className = tweaks.layout;
+    document.getElementById('tweak-layout').value = tweaks.layout;
+
+    // Show/hide sidebar hero section
+    const heroSingle = document.querySelector('.hero-section-single');
+    if (tweaks.layout === 'layout-single') {
+      heroSingle.style.display = '';
+    } else {
+      heroSingle.style.display = 'none';
+    }
+
+    // Color
+    const colors = {
+      teal: { main: 'oklch(0.65 0.13 185)', light: 'oklch(0.93 0.05 185)', dark: 'oklch(0.45 0.12 185)' },
+      indigo: { main: 'oklch(0.55 0.2 268)', light: 'oklch(0.93 0.05 268)', dark: 'oklch(0.38 0.15 268)' },
+      slate: { main: 'oklch(0.45 0.04 240)', light: 'oklch(0.93 0.02 240)', dark: 'oklch(0.3 0.04 240)' },
+    };
+    const c = colors[tweaks.color] || colors.teal;
+    document.documentElement.style.setProperty('--teal', c.main);
+    document.documentElement.style.setProperty('--teal-light', c.light);
+    document.documentElement.style.setProperty('--teal-dark', c.dark);
+    document.getElementById('tweak-color').value = tweaks.color;
+
+    // Font size
+    document.body.style.fontSize = tweaks.fontSize + 'px';
+    document.getElementById('tweak-font').value = tweaks.fontSize;
+  }
+
+  applyTweaks();
+
+  document.getElementById('tweak-layout').addEventListener('change', e => {
+    tweaks.layout = e.target.value;
+    applyTweaks();
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { layout: tweaks.layout } }, '*');
+  });
+  document.getElementById('tweak-color').addEventListener('change', e => {
+    tweaks.color = e.target.value;
+    applyTweaks();
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { color: tweaks.color } }, '*');
+  });
+  document.getElementById('tweak-font').addEventListener('input', e => {
+    tweaks.fontSize = parseInt(e.target.value);
+    applyTweaks();
+    window.parent.postMessage({ type: '__edit_mode_set_keys', edits: { fontSize: tweaks.fontSize } }, '*');
+  });
+
+  // Tweaks toggle
+  window.addEventListener('message', e => {
+    if (e.data?.type === '__activate_edit_mode') document.getElementById('tweaks-panel').style.display = 'block';
+    if (e.data?.type === '__deactivate_edit_mode') document.getElementById('tweaks-panel').style.display = 'none';
+  });
+  window.parent.postMessage({ type: '__edit_mode_available' }, '*');
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
 </body>
 </html>
